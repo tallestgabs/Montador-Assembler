@@ -1,11 +1,6 @@
-#include "Utils.h"
+#include "utils.h"
 #include <string>
 #include <algorithm>
-
-
-
-
-
 
 void to_upper(std::string &str){
     std::transform(str.begin(), str.end(), str.begin(), ::toupper);

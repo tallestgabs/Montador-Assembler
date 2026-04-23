@@ -1,9 +1,9 @@
-#include "Utils.h"
+#include "utils.h"
 #include <iostream>
 #include <fstream>
 #include <string>
 
-// compilar com g++ main.cpp Utils.cpp -o namefile 
+// compilar com g++ main.cpp utils.cpp -o namefile 
 
 int main(){
 
