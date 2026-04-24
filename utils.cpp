@@ -55,4 +55,14 @@ std::string clear_spaces(const std::string &str){
 
 
 
+std::string remove_comments(const std::string &str){
+    size_t pos = str.find(';');
 
+    // se encontrar recorta a string
+    if(pos != std::string::npos){
+        return str.substr(0, pos);
+    }
+
+    // se nao encontrar retorna a string original
+    return str;
+}
