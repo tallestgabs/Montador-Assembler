@@ -16,4 +16,6 @@ std::string clear_spaces(const std::string &str);
 // remove comentarios 
 std::string remove_comments(const std::string &str);
 
+
+
 #endif
