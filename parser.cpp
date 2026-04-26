@@ -20,7 +20,7 @@ AssemblyLine line_parser(std::string linha){
     if(pos_espaco != std::string::npos){
         // se tiver espaco entao tem operacao e operandos
         linha_parseada.operacao = linha.substr(0, pos_espaco);
-        linha_parseada.operandos = linha.substr(0, pos_espaco + 1);
+        linha_parseada.operandos = linha.substr(pos_espaco + 1);
     }
     else{
         // se nao tiver espaco eh apenas instrucao (ex: STOP)

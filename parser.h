@@ -9,4 +9,6 @@ struct AssemblyLine {
     std::string operandos;
 };
 
+AssemblyLine line_parser(std::string linha);
+
 #endif
