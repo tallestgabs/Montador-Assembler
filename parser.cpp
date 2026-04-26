@@ -24,7 +24,7 @@ AssemblyLine line_parser(std::string linha){
     }
     else{
         // se nao tiver espaco eh apenas instrucao (ex: STOP)
-        linha_parseada.operacao = linha;
+        linha_parseada.operacao = trim(linha); // O trim é para limpar o enter
     }
 
     return linha_parseada;
