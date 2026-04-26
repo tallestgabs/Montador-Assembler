@@ -1,3 +1,5 @@
-teste.pre 
-teste.asm
 ASSEMBLER
+*.pre
+*.asm
+*.obj
+*.pen
