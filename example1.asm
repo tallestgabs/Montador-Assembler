@@ -3,8 +3,7 @@ SECtIOn       DATA
  SPaCE  
  H: SpACE 
 r:     SPACE 
-DoIS:           CONST 
-     2
+DoIS:           CONST        2
 section TeXT
 InPUT         B
 INpUt               h
