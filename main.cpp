@@ -149,8 +149,8 @@ int main(int argc, char* argv[]){
 
     // ========== MODO TESTE DO ASSEMBLER ===========
     // Descomente as duas linhas abaixo para ver o relatorio no terminal
-    assembler_test(filename);
-    return 0;
+    //assembler_test(filename);
+    //return 0;
     // ==============================================
 
     
@@ -158,8 +158,10 @@ int main(int argc, char* argv[]){
         pre_processar(filename);
     } else if (filename.find(".pre") != std::string::npos) {
         // Chama o montador -> gera .obj e .pen 
+        montar(filename);
     } else if (filename.find(".obj") != std::string::npos) {
         // Chama o simulador
+        simulator(filename);
     }
     return 0;
 }
