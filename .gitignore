@@ -1,5 +1,9 @@
 ASSEMBLER
 *.pre
+
 *.asm
+!bin.asm 
+!example1.asm 
+
 *.obj
 *.pen
