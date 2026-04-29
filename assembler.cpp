@@ -127,10 +127,19 @@ void montar(const std::string& nome_arquivo_pre) { // Recebe o arquivo .pre do p
                     tabela_simbolos[linha.rotulo].is_defined = true;    // Levanta a flag de encontrado 
                     tabela_simbolos[linha.rotulo].address = contador_posicao; // Anota o endereço onde foi encontrado
                     
-                    for (int pos_pendente : tabela_simbolos[linha.rotulo].pendencies) { // Vai na lista de pendências
-                        codigo_obj[pos_pendente] = std::to_string(contador_posicao); // Resolve cada pendência para este rótulo
+                    // pega o ultimo buraco deixado (head)
+                    int pendente_atual = tabela_simbolos[linha.rotulo].head_pendency;
+                    while(pendente_atual != -1){
+                        // olha o buraco atual para descobrir onde eh o proximo buraco
+                        int proximo_pendente = std::stoi(codigo_obj[pendente_atual]);
+
+                        // substitui o valor do buraco atual pelo endereco verdadeiro da variavel
+                        codigo_obj[pendente_atual] = std::to_string(contador_posicao);
+
+                        // pula para o proximo buraco
+                        pendente_atual = proximo_pendente;
                     }
-                    tabela_simbolos[linha.rotulo].pendencies.clear();   // Limpa os endereços de pendências do rótulo, pois achamos
+
                 }
             } else {
                 tabela_simbolos[linha.rotulo] = {contador_posicao, true, {}}; // Se não está na tabela de símbolos, coloca nela
@@ -200,10 +209,15 @@ void montar(const std::string& nome_arquivo_pre) { // Recebe o arquivo .pre do p
                             e “ligado” com os itens que já se encontram na lista.
                             */
                             
-                            // Referência futura de um símbolo já existente na tabela
-                            tabela_simbolos[op].pendencies.push_back(contador_posicao);
-                            codigo_obj.push_back("-1"); // Será substituído no futuro
-                            codigo_pen.push_back("-1"); // Fica com o "buraco" para o arquivo .pen
+                            // Referência futura de um símbolo já existente na tabela porem ainda nao foi achado
+                            int buraco_antigo = tabela_simbolos[op].head_pendency;
+
+                            // coloca o endereco antigo (ligando a corrente entre as pendencias)
+                            codigo_obj.push_back(std::to_string(buraco_antigo)); // Será substituído no futuro
+                            codigo_pen.push_back(std::to_string(buraco_antigo)); // Fica com o "buraco" para o arquivo .pen
+
+                            // atualiza a tabela atualizando o buraco
+                            tabela_simbolos[op].head_pendency = contador_posicao;
                         }
                     } else {
 
@@ -215,6 +229,8 @@ void montar(const std::string& nome_arquivo_pre) { // Recebe o arquivo .pre do p
 
                         // Símbolo totalmente novo aparecendo como operando primeiro
                         tabela_simbolos[op] = {-1, false, {contador_posicao}};
+
+                        // como eh o fim da lista (primeiro buraco gerado) ele ganha o -1
                         codigo_obj.push_back("-1");
                         codigo_pen.push_back("-1");
                     }

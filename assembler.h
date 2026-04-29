@@ -39,7 +39,7 @@ struct SymbolData {
     */
     int address;                 // Endereço de memória onde o rótulo foi definido
     bool is_defined;             // True se já achamos a declaração dele (ex: L1: SPACE)
-    std::vector<int> pendencies; // Lista de posições (PC) que ficaram com "buraco" esperando esse rótulo
+    int head_pendency;           // Guarda o endereco do ultimo buraco (o head)
 };
 
 // Declaração da função principal
