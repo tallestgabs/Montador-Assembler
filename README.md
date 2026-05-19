@@ -16,7 +16,7 @@ Este projeto contém a implementação em C++ de um montador de passagem única 
 - **Sistema Operacional:** Linux (Ubuntu / Linux Mint)
 - **Compilador:** GCC (G++)
 - **Linguagem:** C++ (Padrão C++11 ou superior)
-- **Bibliotecas:** Foram utilizadas apenas bibliotecas padrão da linguagem (STL), sem dependências adicionais.## Desenvolvedores
+- **Bibliotecas:** Foram utilizadas apenas bibliotecas padrão da linguagem (STL), sem dependências adicionais.
 
 ## Instruções de Compilação
 
