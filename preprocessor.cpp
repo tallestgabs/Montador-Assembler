@@ -4,7 +4,7 @@
 #include <fstream>
 #include <vector>
 #include <map>
-
+#include <algorithm> // Necessário para o std::replace
 
 // Função auxiliar para substituir as chaves do EQU no código
 std::string substituir_equ(std::string linha, const std::map<std::string, std::string>& tabela_equ) {
@@ -66,6 +66,10 @@ void pre_processar(const std::string& nome_arquivo_entrada) {
 
     // Lê o arquivo .asm linha por linha
     while (std::getline(arquivo_entrada, linha)) {
+        // Correção do tab
+        std::replace(linha.begin(), linha.end(), '\t', ' '); // Transforma Tabs em Espaços
+        std::replace(linha.begin(), linha.end(), '\r', ' '); // Limpa lixo de formatação do Windows
+
         // Limpeza usando o utils.cpp
         linha = remove_comments(linha); // Remove tudo depois do ;
         to_upper(linha);                // Converte tudo para maiusculo

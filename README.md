@@ -6,19 +6,19 @@
 
 Este projeto contém a implementação em C++ de um montador de passagem única e simulador para uma linguagem assembly inventada. O sistema foi desenvolvido como requisito do Trabalho Prático 1 para a disciplina de Software Básico, ministrada pelo Prof. Bruno Macchiavello.
 
-## 👥 Desenvolvedores
+## Desenvolvedores
 
 - **Gabriel de Castro Dias - 211055432**
 - **Arthur Luiz Lima de Araújo - 232000472**
 
-## 💻 Ambiente de Desenvolvimento
+## Ambiente de Desenvolvimento
 
 - **Sistema Operacional:** Linux (Ubuntu / Linux Mint)
 - **Compilador:** GCC (G++)
 - **Linguagem:** C++ (Padrão C++11 ou superior)
 - **Bibliotecas:** Foram utilizadas apenas bibliotecas padrão da linguagem (STL), sem dependências adicionais.## Desenvolvedores
 
-## 🛠️ Instruções de Compilação
+## Instruções de Compilação
 
 Para compilar todo o projeto e gerar o executável único chamado `montador`, utilize o seguinte comando no terminal dentro da pasta raiz:
 
@@ -26,7 +26,7 @@ Para compilar todo o projeto e gerar o executável único chamado `montador`, ut
 g++ *.cpp -o montador
 ```
 
-## 🚀 Instruções de Execução
+## Instruções de Execução
 
 O programa identifica a ação a ser realizada automaticamente através da extensão do arquivo de entrada:
 

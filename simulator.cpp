@@ -1,7 +1,7 @@
 #include "simulator.h"
 #include <iostream>
 #include <fstream>
-
+#include <iomanip>
 
 // copia a linha do .obj para o vetor (nossa RAM simulada)
 void simulator(std::string &objFile){
@@ -35,7 +35,7 @@ void simulator(std::string &objFile){
 
     std::cout << "\n ===== INICIANDO SIMULADOR ====\n";
 
-    while (ram[PC] != 14) {
+    while (PC < ram.size() && ram[PC] != 14) {
 
         switch(ram[PC]) {  
 
@@ -107,10 +107,17 @@ void simulator(std::string &objFile){
                 break;
 
             case 12:    //INPUT
-                std::cout << "Digite um valor inteiro\n";
-                std::cin >> ram[ram[PC+1]];
+            {
+            std::cout << "Digite um valor inteiro\n";
+                std::string entrada;
+                std::cin >> entrada;
+                // O terceiro parametro sendo 0 faz o C++ detectar automaticamente 
+                // se é decimal (ex: 15) ou hexa (ex: 0x0F)
+                ram[ram[PC+1]] = std::stoi(entrada, nullptr, 0);
                 PC += 2; 
+            }
                 break;
+            
 
             case 13:    //OUTPUT
                 std::cout << "SAIDA: " << ram[ram[PC+1]] << '\n';

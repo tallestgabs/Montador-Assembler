@@ -9,7 +9,6 @@
 #include "simulator.h"
 #include "parser.h" 
 
-
 void imprimir_tabela(const std::string& titulo, const std::string& conteudo) {
     std::cout << "\n" << titulo << "\n";
     std::cout << "+----------+----------+------------+------------+\n";
@@ -72,15 +71,15 @@ void imprimir_tabela(const std::string& titulo, const std::string& conteudo) {
     std::cout << "+----------+----------+------------+------------+\n";
 }
 
-//funcao para testar o parser
+// funcao para testar o parser
 void parser_test(std::string &file) {
     std::cout << "\n=== MODO TESTE: INICIANDO TESTE DO PARSER ===\n\n";
-    std::cout << "\n=== LENDO ARQUIVO: " << file << "===\n\n";
+    std::cout << "\n=== LENDO ARQUIVO: " << file << " ===\n\n";
 
     // abre arquivo
     std::ifstream arquivo(file);
     if(!arquivo.is_open()){
-        std::cerr << "Erro: Nao foi possivel abrir o arquivo" << file << "\n";
+        std::cerr << "Erro: Nao foi possivel abrir o arquivo " << file << "\n";
         return;
     }
 
@@ -88,11 +87,10 @@ void parser_test(std::string &file) {
     int numero_linha = 1;
 
     while(std::getline(arquivo, linha)){
-
-        //passa linha por linha para o parser
+        // passa linha por linha para o parser
         AssemblyLine linha_atual = line_parser(linha);
 
-        //mostra os resultados
+        // mostra os resultados
         std::cout << "Linha " << numero_linha << ": [" << linha << "]\n";
         std::cout << "  Rotulo:    [" << linha_atual.rotulo << "]\n";
         std::cout << "  Operacao:  [" << linha_atual.operacao << "]\n";
@@ -100,22 +98,21 @@ void parser_test(std::string &file) {
         std::cout << "--------------------------------------\n";
 
         numero_linha++;
-
     }
 
     arquivo.close();
     std::cout << "=== FIM DA LEITURA ===\n\n";
-
 }
-
-
 
 void assembler_test(std::string &file) {
     std::cout << "\n=== MODO TESTE: ASSEMBLER (PASSAGEM UNICA) ===\n";
     
     montar(file);
 
-    std::string base = file.substr(0, file.find(".pre"));
+    // CORREÇÃO: Corta a string no último ponto para evitar bugs de nomenclatura
+    size_t dot_pos = file.find_last_of('.');
+    std::string base = (dot_pos != std::string::npos) ? file.substr(0, dot_pos) : file;
+    
     std::string s_pen, s_obj;
     
     std::ifstream f_pen(base + ".pen");
@@ -129,31 +126,40 @@ void assembler_test(std::string &file) {
     }
 }
 
-
-
-
-
-// compilar com g++ *.cpp -o namefile 
+// compilar com g++ *.cpp -o montador 
 
 int main(int argc, char* argv[]){
 
-    if (argc < 2) return 1;
+    if (argc < 2) {
+        std::cerr << "Uso: ./montador <arquivo>\n";
+        return 1;
+    }
+    
     std::string filename = argv[1];
 
-
     // =========== MODO TESTE DO PARSER =============
-    // remova os comentarios apenas quando for testar
-    //parser_test(filename);
-    //return 0;
+    // Remova os comentarios apenas quando for testar
+    // parser_test(filename);
+    // return 0;
     // ==============================================
 
     // ========== MODO TESTE DO ASSEMBLER ===========
-    // Descomente as duas linhas abaixo para ver o relatorio no terminal
-    //assembler_test(filename);
-    //return 0;
+    // Descomente o bloco abaixo para testar todo o fluxo gerando tabelas
+    /*
+    if (filename.find(".asm") != std::string::npos) {
+        pre_processar(filename);
+        // Gera o nome do arquivo .pre que o pre_processar acabou de criar
+        size_t dot_pos = filename.find_last_of('.');
+        std::string pre_file = filename.substr(0, dot_pos) + ".pre";
+        assembler_test(pre_file);
+    } else if (filename.find(".pre") != std::string::npos) {
+        assembler_test(filename);
+    }
+    return 0;
+    */
     // ==============================================
 
-    
+    // ========== FLUXO NORMAL (ENTREGA FINAL) ==========
     if (filename.find(".asm") != std::string::npos) {
         pre_processar(filename);
     } else if (filename.find(".pre") != std::string::npos) {
@@ -162,6 +168,10 @@ int main(int argc, char* argv[]){
     } else if (filename.find(".obj") != std::string::npos) {
         // Chama o simulador
         simulator(filename);
+    } else {
+        std::cerr << "Extensao de arquivo nao reconhecida.\n";
+        return 1;
     }
+    
     return 0;
 }
