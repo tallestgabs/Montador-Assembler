@@ -33,7 +33,7 @@ void simulator(std::string &objFile){
     int PC = 0;   // program counter
     bool running = true;
 
-    std::cout << "\n ===== INICIANDO SIMULADOR ====\n";
+    //std::cout << "\n ===== INICIANDO SIMULADOR ====\n";
 
     while (PC < ram.size() && ram[PC] != 14) {
 
@@ -108,7 +108,7 @@ void simulator(std::string &objFile){
 
             case 12:    //INPUT
             {
-            std::cout << "Digite um valor inteiro\n";
+            //std::cout << "Digite um valor inteiro\n";
                 std::string entrada;
                 std::cin >> entrada;
                 // O terceiro parametro sendo 0 faz o C++ detectar automaticamente 
@@ -120,7 +120,8 @@ void simulator(std::string &objFile){
             
 
             case 13:    //OUTPUT
-                std::cout << "SAIDA: " << ram[ram[PC+1]] << '\n';
+                //std::cout << "SAIDA: " << ram[ram[PC+1]] << '\n';
+                std::cout << ram[ram[PC+1]] << '\n';
                 PC += 2; 
                 break;
 
@@ -132,7 +133,7 @@ void simulator(std::string &objFile){
         
     }
 
-    std::cout << "\n ===== FIM DO PROGRAMA ===== \n";
+    //std::cout << "\n ===== FIM DO PROGRAMA ===== \n";
 }
 
 
